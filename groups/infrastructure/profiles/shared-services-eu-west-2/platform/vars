@@ -1,0 +1,6 @@
+# AWS Account Details
+aws_profile = "shared-services-eu-west-2"
+environment  = "platform"
+
+# ECS Settings
+ec2_key_pair_name = "platform-infrastructure"
