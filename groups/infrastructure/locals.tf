@@ -1,5 +1,5 @@
 locals {
-  stack_name     = "platform-service"
+  stack_name     = "platform-services"
   stack_fullname = "${local.stack_name}-stack"
   name_prefix    = "${local.stack_name}-${var.environment}"
 
