@@ -20,8 +20,14 @@ terraform {
   backend "s3" {}
 }
 
+resource "aws_kms_key" "ecs" {
+  description             = "${var.environment} KMS ECS key"
+  deletion_window_in_days = 10
+  enable_key_rotation     = true
+}
+
 module "alb" {
-  source = "git@github.com:companieshouse/terraform-modules/aws/application_load_balancer?ref=1.0.205"
+  source = "git@github.com:companieshouse/terraform-modules//aws/application_load_balancer?ref=1.0.205"
 
   environment         = var.environment
   service             = "stack"
