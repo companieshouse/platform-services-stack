@@ -20,6 +20,11 @@ terraform {
   backend "s3" {}
 }
 
+resource "aws_kms_alias" "ecs" {
+  name          = "alias/${var.environment}/${local.stack_fullname}"
+  target_key_id = aws_kms_key.ecs.key_id
+}
+
 resource "aws_kms_key" "ecs" {
   description             = "${var.environment} KMS ECS key"
   deletion_window_in_days = 10
