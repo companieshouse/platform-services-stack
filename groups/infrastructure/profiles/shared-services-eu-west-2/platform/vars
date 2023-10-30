@@ -4,4 +4,4 @@ environment  = "platform"
 
 # ECS Settings
 ec2_key_pair_name = "platform-infrastructure"
-ec2_instance_type = "t3.xlarge"
+ec2_instance_type = "r6g.large"
