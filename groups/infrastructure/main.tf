@@ -78,6 +78,8 @@ echo ECS_CLUSTER="${local.name_prefix}-cluster" > /etc/ecs/ecs.config
 # Sonarqube required
 sysctl -w vm.max_map_count=524288
 sysctl -w fs.file-max=131072
+ulimit -n 131072
+ulimit -u 8192
 EOF
 
   enable_container_insights = var.enable_container_insights
