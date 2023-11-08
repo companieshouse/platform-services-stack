@@ -54,7 +54,7 @@ module "alb" {
 }
 
 module "ecs-cluster" {
-  source = "git@github.com:companieshouse/terraform-library-ecs-cluster.git?ref=1.1.4"
+  source = "git@github.com:companieshouse/terraform-modules//aws/ecs/ecs-cluster?ref=feature/ecs-configure-task-definition"
 
   stack_name  = local.stack_name
   environment = var.environment
