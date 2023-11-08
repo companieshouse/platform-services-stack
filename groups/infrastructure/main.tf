@@ -71,5 +71,14 @@ module "ecs-cluster" {
   ec2_image_id      = var.ec2_image_id
   ec2_instance_type = var.ec2_instance_type
 
+  user_data = <<EOF
+#!/bin/bash
+echo ECS_CLUSTER=${ecs_cluster_name} > /etc/ecs/ecs.config
+
+# Sonarqube required
+sysctl -w vm.max_map_count=524288
+sysctl -w fs.file-max=131072
+EOF
+
   enable_container_insights = var.enable_container_insights
 }
