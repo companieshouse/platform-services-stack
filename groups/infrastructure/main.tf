@@ -73,7 +73,7 @@ module "ecs-cluster" {
 
   user_data = <<EOF
 #!/bin/bash
-echo ECS_CLUSTER="${var.name_prefix}-cluster" > /etc/ecs/ecs.config
+echo ECS_CLUSTER="${local.name_prefix}-cluster" > /etc/ecs/ecs.config
 
 # Sonarqube required
 sysctl -w vm.max_map_count=524288
