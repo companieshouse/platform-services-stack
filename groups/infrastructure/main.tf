@@ -86,6 +86,4 @@ module "ecs-cluster" {
   create_sns_ooh_topic    = false
 
   enable_container_insights = var.enable_container_insights
-
-  default_tags = { Test = "test" }
 }
