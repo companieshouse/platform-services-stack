@@ -87,7 +87,3 @@ module "ecs-cluster" {
 
   enable_container_insights = var.enable_container_insights
 }
-
-output "test" {
-  value = module.ecs-cluster.test
-}
