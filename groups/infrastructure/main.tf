@@ -60,6 +60,8 @@ module "ecs-cluster" {
   environment = var.environment
   name_prefix = local.name_prefix
 
+  aws_profile = var.aws_profile
+
   vpc_id     = data.aws_vpc.vpc.id
   subnet_ids = local.application_subnet_ids
 
