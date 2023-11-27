@@ -73,7 +73,7 @@ module "ecs-cluster" {
   ec2_image_id      = var.ec2_image_id
   ec2_instance_type = var.ec2_instance_type
 
-  user_data = <<EOF
+  user_data = base64encode(<<EOF
 #!/bin/bash
 echo ECS_CLUSTER="${local.name_prefix}-cluster" > /etc/ecs/ecs.config
 
@@ -81,6 +81,7 @@ echo ECS_CLUSTER="${local.name_prefix}-cluster" > /etc/ecs/ecs.config
 sysctl -w vm.max_map_count=524288
 sysctl -w fs.file-max=131072
 EOF
+)
 
   create_sns_notify_topic = false
   create_sns_ooh_topic    = false
