@@ -1,9 +1,9 @@
 terraform {
-  required_version = "~> 1.3"
+  required_version = ">= 1.3, < 2.0"
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "~> 4.54.0"
+      version = ">= 4.0, < 6.0"
     }
     vault = {
       source  = "hashicorp/vault"
@@ -32,7 +32,7 @@ resource "aws_kms_key" "ecs" {
 }
 
 module "alb" {
-  source = "git@github.com:companieshouse/terraform-modules//aws/application_load_balancer?ref=1.0.205"
+  source = "git@github.com:companieshouse/terraform-modules//aws/application_load_balancer?ref=1.0.231"
 
   environment         = var.environment
   service             = "stack"
@@ -54,7 +54,7 @@ module "alb" {
 }
 
 module "ecs-cluster" {
-  source = "git@github.com:companieshouse/terraform-modules//aws/ecs/ecs-cluster?ref=1.0.225"
+  source = "git@github.com:companieshouse/terraform-modules//aws/ecs/ecs-cluster?ref=1.0.231"
 
   stack_name  = local.stack_name
   environment = var.environment
@@ -72,16 +72,6 @@ module "ecs-cluster" {
   ec2_key_pair_name = var.ec2_key_pair_name
   ec2_image_id      = var.ec2_image_id
   ec2_instance_type = var.ec2_instance_type
-
-  user_data = base64encode(<<EOF
-#!/bin/bash
-echo ECS_CLUSTER="${local.name_prefix}-cluster" > /etc/ecs/ecs.config
-
-# Sonarqube required
-sysctl -w vm.max_map_count=524288
-sysctl -w fs.file-max=131072
-EOF
-)
 
   create_sns_notify_topic = false
   create_sns_ooh_topic    = false
